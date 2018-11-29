@@ -7,7 +7,7 @@
 #ifndef SNIPTYPE__H
 #define SNIPTYPE__H
 
-#include <stdlib.h>                             /* For free()           */
+//#include <stdlib.h>                             /* For free()           */
 #include <string.h>                             /* For NULL & strlen()  */
 
 typedef enum {Error_ = -1, Success_, False_ = 0, True_} Boolean_T;
