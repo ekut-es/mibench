@@ -23,3 +23,12 @@ consumer/jpeg/output_small_encode.jpeg
 consumer/jpeg/output_large_decode.ppm
 consumer/jpeg/output_small_decode.ppm
 consumer/jpeg/jpeg-6a/*.o
+
+consumer/lame/lame3.70/*.o
+consumer/lame/lame3.70/*.d
+consumer/lame/lame3.70/lame
+consumer/lame/lame3.70/libmp3lame.a
+consumer/lame/lame3.70/mpglib/*.o
+consumer/lame/lame3.70/mpglib/*.d
+consumer/lame/output_large.mp3
+consumer/lame/output_small.mp3
