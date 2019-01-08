@@ -200,3 +200,5 @@ network/dijkstra/dijkstra_small
 network/dijkstra/output.dat
 network/dijkstra/output_large.dat
 network/dijkstra/output_small.dat
+
+network/patricia/patricia
