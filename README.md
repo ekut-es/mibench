@@ -4,6 +4,7 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
 ## Not Ported:
 `consumer/tiff*`Needs system wide installation
 `office/ghostscript` Not compatible with `stdlib.h`
+`office/ispell` input file has wrong format 
 
 ## Results
 ### User vs. System Time
