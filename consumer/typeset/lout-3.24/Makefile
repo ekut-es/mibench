@@ -302,7 +302,7 @@ ZLIB		=
 ZLIBPATH	=
 
 CC	= gcc
-LD	= gcc -static
+LD	= gcc 
 
 RCOPY	= cp -r
 
