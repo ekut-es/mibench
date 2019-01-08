@@ -2,7 +2,8 @@ Compile Instructions
 --------------------
 1)  Change directories to mad-0.14.2b.
 2)  Type "./configure" to configure the Makefile for your system.
-3)  Type "make".  This will create the executables used by the scripts. If
+3)  Type "./makefile_postprocess.sh" to remove -fforce-mem option from Makefile
+4)  Type "make".  This will create the executables used by the scripts. If
     this doesn't work see the mad-0.14.2b/INSTALL file for details on how
     to fix or modify the install process.
 
