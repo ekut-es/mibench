@@ -1,2 +1,2 @@
 #!/bin/sh
-say -a -q -o large_output.au < largeinput.txt
+./say -a -q -o large_output.au < largeinput.txt

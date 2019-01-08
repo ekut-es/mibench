@@ -34,7 +34,7 @@ SAY_OBJS = say.o saynum.o darray.o ASCII.o phones.o text.o english.o trie.o phto
            getarg.o Revision.o 
 
 say : $(SAY_OBJS) hplay.o 
-	$(CC) -o $@ $(LDFLAGS) $(SAY_OBJS) hplay.o $(LDLIBS)
+	$(CC) -o $@ $(LDFLAGS) $(SAY_OBJS) hplay.o $(LDLIBS) -lm
 
 nasay : $(SAY_OBJS) naplay.o 
 	$(CC) -o $@ $(LDFLAGS) $(SAY_OBJS) naplay.o $(XLIBS) $(LDLIBS)
