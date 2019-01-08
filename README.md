@@ -2,7 +2,8 @@
 Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhosts.eecs.umich.edu/mibench/source.html)
 
 ## Not Ported:
-`consumer/tiff*` Because it needs system wide installation
+`consumer/tiff*`Needs system wide installation
+`office/ghostscript` Not compatible with `stdlib.h`
 
 ## Results
 ### User vs. System Time
