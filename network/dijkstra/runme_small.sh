@@ -1,2 +1,2 @@
 #!/bin/sh
-dijkstra_small input.dat > output_small.dat
+./dijkstra_small input.dat > output_small.dat

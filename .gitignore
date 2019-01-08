@@ -195,4 +195,8 @@ consumer/typeset/output_large.ps
 consumer/typeset/output_small.ps
 consumer/typeset/small.lout.ld
 
-
+network/dijkstra/dijkstra_large
+network/dijkstra/dijkstra_small
+network/dijkstra/output.dat
+network/dijkstra/output_large.dat
+network/dijkstra/output_small.dat
