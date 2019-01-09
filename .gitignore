@@ -270,3 +270,20 @@ office/sphinx/stamp-h
 office/stringsearch/search_large
 office/stringsearch/search_small
 
+security/blowfish/bf
+security/blowfish/bf.o
+security/blowfish/bf_cbc.o
+security/blowfish/bf_cfb64.o
+security/blowfish/bf_ecb.o
+security/blowfish/bf_enc.o
+security/blowfish/bf_ofb64.o
+security/blowfish/bf_skey.o
+security/blowfish/bfspeed
+security/blowfish/bfspeed.o
+security/blowfish/bftest
+security/blowfish/bftest.o
+security/blowfish/libblowfish.a
+security/blowfish/output_large.asc
+security/blowfish/output_large.enc
+
+
