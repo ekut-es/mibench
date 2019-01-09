@@ -557,6 +557,10 @@ eval_hmm_arcprob (int32 ssid)
 /* Node Plus Arc (mpx channel) */
 #define NPA(d,s,a)	(s + d->tp[a])
 
+
+static void compute_phone_perplexity( void );
+static search_hyp_t *fwdtree_pscr_path ( void );
+
 void
 root_chan_v_mpx_eval (ROOT_CHAN_T *chan)
 {
@@ -2265,7 +2269,6 @@ search_finish_fwd (void)
     CHAN_T *hmm, /* *thmm,*/ **acl;
     /* int32 bp, bestbp, bestscore; */
     /* int32 l_scr; */
-    static void compute_phone_perplexity( void );
     
     if ((CurrentFrame > 0) && (topsen_window > 1)) {
 	/* Wind up remaining frames */
@@ -2326,7 +2329,6 @@ search_finish_fwd (void)
     /* Get pscr-score for fwdtree recognition */
     {
 	search_hyp_t *pscrpath;
-	static search_hyp_t *fwdtree_pscr_path ( void );
 	
 	if (query_phone_conf ()) {
 	    pscrpath = fwdtree_pscr_path ();

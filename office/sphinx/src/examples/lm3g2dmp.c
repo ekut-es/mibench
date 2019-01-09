@@ -361,54 +361,7 @@ static unigram_t *NewUnigramTable (n_ug)
  * returns a pointer to a new language model record.  The size is passed in
  * as a parameter.
  */
-static lm_t *
-NewModel (n_ug, n_bg, n_tg, n_dict)
-    int32 n_ug;
-    int32 n_bg;
-    int32 n_tg;
-    int32 n_dict;
-{
-    lm_t *model;
-    int32 i;
 
-    model = (lm_t *) CM_calloc (1, sizeof (lm_t));
-
-    /*
-     * Allocate one extra unigram and bigram entry: sentinels to terminate
-     * followers (bigrams and trigrams, respectively) of previous entry.
-     */
-    model->unigrams	= NewUnigramTable (n_ug+1);
-    model->bigrams	= (bigram_t *) CM_calloc (n_bg+1, sizeof (bigram_t));
-    if (n_tg > 0)
-	model->trigrams	= (trigram_t *) CM_calloc (n_tg, sizeof (trigram_t));
-
-    /* Allocate dictwid_map only once; shared among all LMs; valid only for current LM */
-    if (dictwid_map == NULL)
-	dictwid_map = (int32 *) CM_calloc (n_dict, sizeof (int32));
-    model->dictwid_map = dictwid_map;
-    
-    for (i = 0; i < n_dict; i++)
-	model->dictwid_map[i] = 0x80000000;	/* an illegal index into unigrams */
-    
-    if (n_tg > 0) {
-	model->tseg_base = (int32 *) CM_calloc ((n_bg+1)/BG_SEG_SZ+1, sizeof (int32));
-#if 0
-	printf("%s(%d): %8d = tseg_base entries allocated\n",
-	       __FILE__, __LINE__, (n_bg+1)/BG_SEG_SZ+1);
-#endif
-    }
-
-    model->max_ucount = model->ucount = n_ug;
-    model->bcount = n_bg;
-    model->tcount = n_tg;
-    model->dict_size = n_dict;
-    
-    model->HT.size = 0;
-    model->HT.inuse = 0;
-    model->HT.tab = NULL;
-
-    return model;
-}
 
 #ifdef NO_DICT
 #define GET_WORD_IDX(w)		wstr2wid (lmp, w)
@@ -993,176 +946,7 @@ static int32 lm_read (char *filename, char *lmname, double lw, double uw, double
 }
 
 
-static void lm_init_oov ( void )
-{
-#if (! NO_DICT)
-    int32 i, j, baseid;
-    int32 first_oov = 0, last_oov = -1;
-    lm_t *model;
-    
-    model = lm_name2lm ("");
-    
-    /* Add initial list of OOV words to LM unigrams */
-    first_oov = dict_get_first_initial_oov ();
-    last_oov = dict_get_last_initial_oov ();
-    printf ("%s(%d): Adding %d initial OOV words to LM\n",
-	    __FILE__, __LINE__, last_oov-first_oov+1);
 
-    oov_ugprob = kb_get_oov_ugprob ();
-
-    for (i = first_oov; i <= last_oov; i++) {
-	/* Add only base pronunciations */
-	if ((baseid = dictid_to_baseid (WordDict, i)) == i) {
-	    if ((j = lm_add_word (model, i)) >= 0)
-		model->dictwid_map[i] = j;
-	}
-    }
-#endif
-}
-
-
-/*
- * Add new word with given dictionary wid and unigram prob = oov_ugprob to
- * model->unigrams.  Do not update dictwid here as the LM being updated might not
- * be the currently active one.  Return LM wid of inserted word if successful,
- * otherwise -1.
- * (Currently some problems with adding alternative pronunciations...)
- */
-static int32 lm_add_word (lm_t *model, int32 dictwid)
-{
-#if (! NO_DICT)
-    int32 u;
-
-    if (model->ucount >= model->max_ucount) {
-	printf ("%s(%d): lm_add_word(%s) failed; LM full\n",
-		__FILE__, __LINE__, dictid_to_str (WordDict, dictwid));
-	return -1;
-    }
-    
-    /* Make sure new word not already in LM */
-    for (u = 0; u < model->ucount; u++)
-	if (model->unigrams[u].wid == dictwid) {
-	    printf ("%s(%d): lm_add_word(%s): already in LM, ignored\n",
-		    __FILE__, __LINE__, dictid_to_str (WordDict, dictwid));
-	    return u;
-	}
-    
-    /* Append new word to unigrams */
-    model->unigrams[model->ucount].wid = dictwid;
-    model->unigrams[model->ucount].prob1.l = LOG10TOLOG(oov_ugprob) * model->lw +
-	model->log_wip;
-    model->unigrams[model->ucount].bo_wt1.l = LOG10TOLOG(0.0) * model->lw;
-
-    /* Advance the sentinel unigram */
-    model->unigrams[model->ucount+1].bigrams = model->unigrams[model->ucount].bigrams;
-
-    /* Update dictwid_map if this is the currently active LM */
-    if (lmp == model)
-	model->dictwid_map[dictwid] = model->ucount;
-    
-    return (model->ucount++);
-#else 
-    return -1;
-#endif
-}
-
-
-/*
- * Add named model to list of models.  If another with same name exists, delete it first.
- */
-static void lm_add (char const *lmname, lm_t *model, double lw, double uw, double wip)
-{
-    if (lmname_to_id (lmname) >= 0)
-	lm_delete (lmname);
-    
-    model->tginfo = (tginfo_t **) CM_calloc (model->max_ucount, sizeof(tginfo_t *));
-    
-    if (n_lm == n_lm_alloc) {
-	lmset = (struct lmset_s *) CM_recalloc (lmset, n_lm+15, sizeof(struct lmset_s));
-	n_lm_alloc += 15;
-    }
-    lmset[n_lm].lm = model;
-    lmset[n_lm].name = salloc (lmname);
-    
-    lm_set_param (model, lw, uw, wip, FALSE);
-    
-    n_lm++;
-    
-    printf ("%s(%d): LM(\"%s\") added\n", __FILE__, __LINE__, lmname);
-}
-
-/*
- * Delete named LM from list of LMs and reclaim all space.
- */
-static int32 lm_delete (char const *name)
-{
-    int32 i, u;
-    lm_t *model;
-    tginfo_t *tginfo, *next_tginfo;
-    
-    if ((i = lmname_to_id (name)) < 0)
-	return (-1);
-    
-    model = lmset[i].lm;
-    free (model->unigrams);
-    free (model->bigrams);
-    free (model->prob2);
-    if (model->tcount > 0) {
-	free (model->trigrams);
-	free (model->tseg_base);
-	free (model->bo_wt2);
-	free (model->prob3);
-    }
-    if (model->HT.tab != NULL)
-	hash_free (&model->HT);
-    
-    for (u = 0; u < model->max_ucount; u++)
-	for (tginfo = model->tginfo[u]; tginfo; tginfo = next_tginfo) {
-	    next_tginfo = tginfo->next;
-	    listelem_free (tginfo, sizeof(tginfo_t));
-	}
-    free (model->tginfo);
-    
-    free (model);
-    
-    free (lmset[i].name);
-    
-    for (; i < n_lm-1; i++)
-	lmset[i] = lmset[i+1];
-    --n_lm;
-    
-    printf ("%s(%d): LM(\"%s\") deleted\n", __FILE__, __LINE__, name);
-    
-    return (0);
-}
-
-/*
- * Set the active LM to the one identified by "name".  Return 0 if successful,
- * -1 otherwise.
- */
-static int32 lm_set_current (char const *name)
-{
-    int32 i;
-    
-    if ((i = lmname_to_id (name)) < 0)
-	return (-1);
-    
-    lmp = lmset[i].lm;
-
-    /* Recreate dictwid_map for this LM */
-    for (i = 0; i < lmp->dict_size; i++)
-	lmp->dictwid_map[i] = 0x80000000;	/* an illegal index into unigrams */
-    for (i = 0; i < lmp->ucount; i++) {
-	if ((lmp->unigrams[i].mapid >= 0) && (lmp->unigrams[i].mapid < lmp->dict_size))
-	    lmp->dictwid_map[lmp->unigrams[i].mapid] = i;
-    }
-    
-#ifdef USE_ILM
-    ilm_set_lm (lmp);
-#endif
-    
-    return (0);
-}
 
 static int32 lmname_to_id (char const *name)
 {
@@ -1172,40 +956,7 @@ static int32 lmname_to_id (char const *name)
     return ((i < n_lm) ? i : -1);
 }
 
-static lm_t *lm_name2lm (char const *name)
-{
-    int32 i;
-    
-    i = lmname_to_id (name);
-    return ((i >= 0) ? lmset[i].lm : NULL);
-}
 
-static char *get_current_lmname ()
-{
-    int32 i;
-    
-    for (i = 0; (i < n_lm) && (lmset[i].lm != lmp); i++);
-    return ((i < n_lm) ? lmset[i].name : NULL);
-}
-
-static lm_t *lm_get_current ()
-{
-    return (lmp);
-}
-
-static int32 get_n_lm ()
-{
-    return (n_lm);
-}
-
-/*
- * dict base wid; check if present in LM.  return TRUE if present, FALSE otherwise.
- */
-static int32 dictwd_in_lm (wid)
-    int32 wid;
-{
-    return (lmp->dictwid_map[wid] >= 0);
-}
 
 #if (__BIG_ENDIAN__)
 
@@ -1588,21 +1339,7 @@ static int32 lm3g_dump (file, model, lmfile, mtime)
     return 0;
 }
 
-static void lmSetStartSym (char const *sym)
-/*----------------------------*
- * Description - reconfigure the start symbol
- */
-{
-    start_sym = (char *) salloc(sym);
-}
 
-static void lmSetEndSym (char const *sym)
-/*----------------------------*
- * Description - reconfigure the end symbol
- */
-{
-    end_sym = (char *) salloc(sym);
-}
 
 /*
  * Convert probs and backoff weights to LOG quantities, add language weight
@@ -1692,16 +1429,6 @@ int main (argc, argv)
 #define BINARY_SEARCH_THRESH	16
 
 
-static int32 lm3g_ug_score (int32 wid)
-{
-    int32 lwid;
-    
-    if ((lwid = lmp->dictwid_map[wid]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, wid);
-    return (lmp->unigrams[lwid].prob1.l);
-}
-
-
 /* Locate a specific bigram within a bigram list */
 static int32 find_bg (bigram_t *bg, int32 n, int32 w)
 {
@@ -1723,37 +1450,6 @@ static int32 find_bg (bigram_t *bg, int32 n, int32 w)
     /* Linear search within narrowed segment */
     for (i = b; (i < e) && (bg[i].wid != w); i++);
     return ((i < e) ? i : -1);
-}
-
-
-/* w1, w2 are dictionary (base-)word ids */
-static int32 lm3g_bg_score (int32 w1, int32 w2)
-{
-    int32 lw1, lw2, i, n, b, score;
-    lm_t *lm;
-    bigram_t *bg;
-    
-    lm = lmp;
-    
-    /* lm->n_bg_score++; */
-    
-    if ((lw1 = lm->dictwid_map[w1]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, w1);
-    if ((lw2 = lm->dictwid_map[w2]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, w2);
-    
-    b = FIRST_BG(lm, lw1);
-    n = FIRST_BG(lm, lw1+1) - b;
-    bg = lm->bigrams + b;
-    
-    if ((i = find_bg (bg, n, lw2)) >= 0)
-	score = lm->prob2[bg[i].prob2].l;
-    else {
-	/* lm->n_bg_bo++; */
-	score = lm->unigrams[lw1].bo_wt1.l + lm->unigrams[lw2].prob1.l;
-    }
-
-    return (score);
 }
 
 
@@ -1815,105 +1511,3 @@ static int32 find_tg (trigram_t *tg, int32 n, int32 w)
     return ((i < e) ? i : -1);
 }
 
-
-/* w1, w2, w3 are dictionary wids */
-static int32 lm3g_tg_score (int32 w1, int32 w2, int32 w3)
-{
-    int32 lw1, lw2, lw3, i, n, score;
-    lm_t *lm;
-    trigram_t *tg;
-    tginfo_t *tginfo, *prev_tginfo;
-    
-    lm = lmp;
-    
-    if ((lm->tcount <= 0) || (w1 < 0))
-	return (lm3g_bg_score (w2, w3));
-    
-    /* lm->n_tg_score++; */
-    
-    if ((lw1 = lm->dictwid_map[w1]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, w1);
-    if ((lw2 = lm->dictwid_map[w2]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, w2);
-    if ((lw3 = lm->dictwid_map[w3]) < 0)
-	quit(-1, "%s(%d): dictwid[%d] not in LM\n", __FILE__, __LINE__, w3);
-    
-    prev_tginfo = NULL;
-    for (tginfo = lm->tginfo[lw2]; tginfo; tginfo = tginfo->next) {
-	if (tginfo->w1 == lw1)
-	    break;
-	prev_tginfo = tginfo;
-    }
-    
-    if (! tginfo) {
-    	load_tginfo (lm, lw1, lw2);
-	tginfo = lm->tginfo[lw2];
-    } else if (prev_tginfo) {
-	prev_tginfo->next = tginfo->next;
-	tginfo->next = lm->tginfo[lw2];
-	lm->tginfo[lw2] = tginfo;
-    }
-
-    tginfo->used = 1;
-    
-    /* Trigrams for w1,w2 now pointed to by tginfo */
-    n = tginfo->n_tg;
-    tg = tginfo->tg;
-    if ((i = find_tg (tg, n, lw3)) >= 0)
-	score = lm->prob3[tg[i].prob3].l;
-    else {
-	/* lm->n_tg_bo++; */
-	score = tginfo->bowt + lm3g_bg_score(w2, w3);
-    }
-
-    return (score);
-}
-
-
-static void lm3g_cache_reset ( void )
-{
-    int32 i;
-    lm_t *lm;
-    tginfo_t *tginfo, *next_tginfo, *prev_tginfo;
-    
-    lm = lmp;
-    for (i = 0; i < lm->ucount; i++) {
-	prev_tginfo = NULL;
-	for (tginfo = lm->tginfo[i]; tginfo; tginfo = next_tginfo) {
-	    next_tginfo = tginfo->next;
-	    
-	    if (! tginfo->used) {
-		/* lm->n_tg_inmem -= tginfo->n_tg; */
-		listelem_free (tginfo, sizeof(tginfo_t));
-		if (prev_tginfo)
-		    prev_tginfo->next = next_tginfo;
-		else
-		    lm->tginfo[i] = next_tginfo;
-		
-		/* n_tgfree++; */
-	    } else {
-		tginfo->used = 0;
-		prev_tginfo = tginfo;
-	    }
-	}
-    }
-}
-
-
-static void lm3g_cache_stats_dump (FILE *file)
-{
-}
-
-
-static void lm_next_frame ( void )
-{
-}
-
-
-static int32 lm3g_raw_score (int32 score)
-{
-    score -= lmp->log_wip;
-    score *= lmp->invlw;
-    
-    return score;
-}

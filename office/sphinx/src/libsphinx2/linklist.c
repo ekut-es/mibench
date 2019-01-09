@@ -127,7 +127,7 @@ void *listelem_alloc (int32 elem_size)
 	cpp = list[i].freelist = (void **) malloc (list[i].n_malloc * elem_size);
 	cp = (void *) cpp;
 	for (j = list[i].n_malloc-1; j > 0; --j) {
-	    (char*)cp += elem_size;
+	    cp = (char*)cp + elem_size;
 	    *cpp = cp;
 	    cpp = (void **)cp;
 	}
