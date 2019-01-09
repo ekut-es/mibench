@@ -266,3 +266,7 @@ office/sphinx/src/libsphinx2/include/Makefile
 office/sphinx/src/libsphinx2ad/Makefile
 office/sphinx/src/libsphinx2fe/Makefile
 office/sphinx/stamp-h
+
+office/stringsearch/search_large
+office/stringsearch/search_small
+
