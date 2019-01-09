@@ -286,4 +286,5 @@ security/blowfish/libblowfish.a
 security/blowfish/output_large.asc
 security/blowfish/output_large.enc
 
-
+security/pgp/tests/testin.txt.asc
+security/pgp/tests/testout.txt
