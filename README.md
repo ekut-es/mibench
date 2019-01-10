@@ -5,6 +5,8 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
 `consumer/tiff*`Needs system wide installation
 `office/ghostscript` Not compatible with `stdlib.h`
 `office/ispell` input file has wrong format 
+`office/sphinx` Not compatible with `stdlib.h`
+`security/rijndael` Not compatible with `stdlib.h/stdio.h` 
 
 ## Results
 ### User vs. System Time
