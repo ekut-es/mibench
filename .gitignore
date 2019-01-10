@@ -288,3 +288,7 @@ security/blowfish/output_large.enc
 
 security/pgp/tests/testin.txt.asc
 security/pgp/tests/testout.txt
+
+security/sha/sha
+security/sha/sha.o
+security/sha/sha_driver.o
