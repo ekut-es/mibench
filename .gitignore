@@ -292,3 +292,5 @@ security/pgp/tests/testout.txt
 security/sha/sha
 security/sha/sha.o
 security/sha/sha_driver.o
+
+telecomm/CRC32/crc
