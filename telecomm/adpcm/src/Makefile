@@ -13,11 +13,11 @@
 #
 CC = gcc
 LFLAGS = -mv8
-LFLAGS = $(LFLAGS) -static
+LFLAGS = $(LFLAGS) 
 #
 # End of addition
 ######################################################################
-CFLAGS = -static -O3
+CFLAGS = -O3
 
 # May need this on a sun:
 # CFLAGS=-O -I/usr/demo/SOUND
