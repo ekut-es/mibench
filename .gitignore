@@ -302,3 +302,16 @@ telecomm/FFT/main.o
 telecomm/FFT/output_large.inv.txt
 telecomm/FFT/output_small.inv.txt
 
+telecomm/adpcm/bin/
+telecomm/adpcm/output_large.adpcm
+telecomm/adpcm/output_large.pcm
+telecomm/adpcm/output_small.adpcm
+telecomm/adpcm/output_small.pcm
+telecomm/adpcm/src/adpcm.o
+telecomm/adpcm/src/rawcaudio
+telecomm/adpcm/src/rawcaudio.o
+telecomm/adpcm/src/rawdaudio
+telecomm/adpcm/src/rawdaudio.o
+telecomm/adpcm/src/timing
+telecomm/adpcm/src/timing.o
+
