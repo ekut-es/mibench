@@ -294,3 +294,11 @@ security/sha/sha.o
 security/sha/sha_driver.o
 
 telecomm/CRC32/crc
+
+telecomm/FFT/fft
+telecomm/FFT/fftmisc.o
+telecomm/FFT/fourierf.o
+telecomm/FFT/main.o
+telecomm/FFT/output_large.inv.txt
+telecomm/FFT/output_small.inv.txt
+
