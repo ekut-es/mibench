@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET) automotive_qsort_small_$(TARGET) automotive_qsort_large_$(TARGET)
+all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET) automotive_qsort_small_$(TARGET) automotive_qsort_large_$(TARGET) automotive_susan_$(TARGET)
 
 
 automotive_basicmath:
@@ -32,6 +32,10 @@ automotive_qsort_large_$(TARGET):
 
 automotive_susan:
 	$(MAKE) -C automotive/susan
+
+automotive_susan_$(TARGET): automotive_susan
+	cp automotive/susan/susan susan_$(TARGET)
+
 
 consumer_jpeg:
 	$(MAKE) -C consumer/jpeg/jpeg-6a
