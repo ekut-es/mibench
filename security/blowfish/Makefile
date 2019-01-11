@@ -20,8 +20,7 @@ MAKE=make -f Makefile
 #CC=cc
 #CFLAG= -O
 
-CC=gcc
-CFLAG= -O3 -fomit-frame-pointer
+CFLAG := -O3 -fomit-frame-pointer $(CFLAGS)
 
 CFLAGS=$(OPTS) $(CFLAG)
 CPP=$(CC) -E
