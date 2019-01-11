@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET) automotive_qsort_small_$(TARGET) automotive_qsort_large_$(TARGET) automotive_susan_$(TARGET) consumer_jpeg_$(TARGET)
+all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET) automotive_qsort_small_$(TARGET) automotive_qsort_large_$(TARGET) automotive_susan_$(TARGET) consumer_jpeg_$(TARGET) consumer_lame_$(TARGET)
 
 
 automotive_basicmath:
@@ -48,6 +48,10 @@ consumer_jpeg_$(TARGET): consumer_jpeg
 consumer_lame:
 	$(MAKE) -C consumer/lame/lame3.70
 
+consumer_lame_$(TARGET): consumer_lame
+	mv consumer/lame/lame3.70/lame lame_$(TARGET)
+
+
 consumer_typeset:
 	$(MAKE) -C consumer/typeset/lout-3.24
 
@@ -94,6 +98,7 @@ telecomm_gsm:
 	-rm cjpeg_*
 	-rm djpeg_*
 	$(MAKE) -C consumer/lame/lame3.70 clean
+	-rm lame_*
 	$(MAKE) -C consumer/typeset/lout-3.24 clean
 	$(MAKE) -C network/dijkstra clean
 	$(MAKE) -C network/patricia clean
