@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET)
 
 
 automotive_basicmath:
@@ -74,6 +74,9 @@ dijkstra_large_$(TARGET): network_dijkstra
 
 network_patricia:
 	$(MAKE) -C network/patricia
+
+patricia_$(TARGET): network_patricia
+	mv network/patricia/patricia patricia_$(TARGET)
 
 office_stringsearch:
 	$(MAKE) -C office/stringsearch
