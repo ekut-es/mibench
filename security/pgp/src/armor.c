@@ -343,7 +343,7 @@ copyline(FILE * in, FILE * out)
  * idea.
  */
 static int
-getline(char *buf, int n, FILE * f)
+getline2(char *buf, int n, FILE * f)
 {
     int state;
     char *p;
@@ -547,7 +547,7 @@ armor_file(char *infilename, char *outfilename, char *filename,
 	    return 1;
 	}
 	fprintf(outFile, "-----BEGIN PGP SIGNED MESSAGE-----\n\n");
-	while ((i = getline(buffer, sizeof buffer, clearFile)) >= 0) {
+	while ((i = getline2(buffer, sizeof buffer, clearFile)) >= 0) {
 	    /* Quote lines beginning with '-' as per RFC1113;
 	     * Also quote lines beginning with "From "; this is
 	     * for Unix mailers which add ">" to such lines.
@@ -1231,7 +1231,7 @@ LANG("\n\007Unable to write ciphertext output file '%s'.\n"), litfile);
 	for (;;) {
 	    ++infile_line;
 	    nline = status;
-	    status = getline(buf, sizeof buf, in);
+	    status = getline2(buf, sizeof buf, in);
 	    if (status < 0) {
 		fprintf(pgpout,
 LANG("ERROR: ASCII armor decode input ended unexpectedly!\n"));
