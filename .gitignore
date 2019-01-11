@@ -384,3 +384,6 @@ telecomm/gsm/src/toast_alaw.o
 telecomm/gsm/src/toast_audio.o
 telecomm/gsm/src/toast_lin.o
 telecomm/gsm/src/toast_ulaw.o
+
+basicmath_*
+bitcnts_*

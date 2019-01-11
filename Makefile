@@ -1,10 +1,24 @@
-all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
+#all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
+
+all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET)
+
 
 automotive_basicmath:
 	$(MAKE) -C automotive/basicmath
 
+automotive_basicmath_small_$(TARGET): automotive_basicmath
+	cp automotive/basicmath/basicmath_small basicmath_small_$(TARGET)
+
+automotive_basicmath_large_$(TARGET): automotive_basicmath
+	cp automotive/basicmath/basicmath_large basicmath_large_$(TARGET)
+ 
+
 automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
+
+automotive_bitcount_$(TARGET): automotive_bitcount
+	cp automotive/bitcount/bitcnts bitcnts_$(TARGET)
+
 
 automotive_qsort:
 	$(MAKE) -C automotive/qsort
@@ -51,7 +65,10 @@ telecomm_gsm:
 
 .PHONY clean:
 	$(MAKE) -C automotive/basicmath clean
+	-rm basicmath_small_*
+	-rm basicmath_large_*
 	$(MAKE) -C automotive/bitcount clean
+	-rm bitcnts_*
 	$(MAKE) -C automotive/qsort clean
 	$(MAKE) -C automotive/susan clean
 	$(MAKE) -C consumer/jpeg/jpeg-6a clean
@@ -65,4 +82,4 @@ telecomm_gsm:
 	$(MAKE) -C telecomm/CRC32 clean
 	$(MAKE) -C telecomm/FFT clean
 	$(MAKE) -C telecomm/adpcm/src clean 
-	$(MAKE) -C telecomm/gsm/clean clean 
+	$(MAKE) -C telecomm/gsm clean 
