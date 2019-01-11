@@ -387,3 +387,4 @@ telecomm/gsm/src/toast_ulaw.o
 
 basicmath_*
 bitcnts_*
+qsort_*
