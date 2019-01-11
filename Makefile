@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET) rawcaudio_$(TARGET) rawdaudio_$(TARGET)
 
 
 automotive_basicmath:
@@ -119,6 +119,13 @@ fft_$(TARGET): telecomm_FFT
 telecomm_adpcm:
 	$(MAKE) -C telecomm/adpcm/src
 
+rawcaudio_$(TARGET): telecomm_adpcm
+	mv telecomm/adpcm/bin/rawcaudio rawcaudio_$(TARGET)
+
+rawdaudio_$(TARGET): telecomm_adpcm
+	mv telecomm/adpcm/bin/rawdaudio rawdaudio_$(TARGET)
+	
+
 telecomm_gsm:
 	$(MAKE) -C telecomm/gsm
 
@@ -156,4 +163,6 @@ telecomm_gsm:
 	$(MAKE) -C telecomm/FFT clean
 	-rm fft_*
 	$(MAKE) -C telecomm/adpcm/src clean 
+	-rm rawcaudio_*
+	-rm rawdaudio_*
 	$(MAKE) -C telecomm/gsm clean 

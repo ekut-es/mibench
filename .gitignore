@@ -400,3 +400,5 @@ blowfish_*
 sha_*
 crc_*
 fft_*
+rawcaudio_*
+rawdaudio_*
