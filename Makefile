@@ -7,34 +7,34 @@ automotive_basicmath:
 	$(MAKE) -C automotive/basicmath
 
 automotive_basicmath_small_$(TARGET): automotive_basicmath
-	cp automotive/basicmath/basicmath_small basicmath_small_$(TARGET)
+	mv automotive/basicmath/basicmath_small basicmath_small_$(TARGET)
 
 automotive_basicmath_large_$(TARGET): automotive_basicmath
-	cp automotive/basicmath/basicmath_large basicmath_large_$(TARGET)
+	mv automotive/basicmath/basicmath_large basicmath_large_$(TARGET)
  
 
 automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
 
 automotive_bitcount_$(TARGET): automotive_bitcount
-	cp automotive/bitcount/bitcnts bitcnts_$(TARGET)
+	mv automotive/bitcount/bitcnts bitcnts_$(TARGET)
 
 
 automotive_qsort:
 	$(MAKE) -C automotive/qsort
 
 automotive_qsort_small_$(TARGET): automotive_qsort
-	cp automotive/qsort/qsort_small qsort_small_$(TARGET)
+	mv automotive/qsort/qsort_small qsort_small_$(TARGET)
 
 automotive_qsort_large_$(TARGET):
-	cp automotive/qsort/qsort_large qsort_large_$(TARGET)
+	mv automotive/qsort/qsort_large qsort_large_$(TARGET)
 
 
 automotive_susan:
 	$(MAKE) -C automotive/susan
 
 automotive_susan_$(TARGET): automotive_susan
-	cp automotive/susan/susan susan_$(TARGET)
+	mv automotive/susan/susan susan_$(TARGET)
 
 
 consumer_jpeg:
