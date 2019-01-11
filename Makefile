@@ -1,65 +1,76 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: automotive_basicmath_small_$(TARGET) automotive_basicmath_large_$(TARGET) automotive_bitcount_$(TARGET) automotive_qsort_small_$(TARGET) automotive_qsort_large_$(TARGET) automotive_susan_$(TARGET) consumer_jpeg_$(TARGET) consumer_lame_$(TARGET) consumer_typeset_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET)
 
 
 automotive_basicmath:
 	$(MAKE) -C automotive/basicmath
 
-automotive_basicmath_small_$(TARGET): automotive_basicmath
+basicmath_small_$(TARGET): automotive_basicmath
 	mv automotive/basicmath/basicmath_small basicmath_small_$(TARGET)
 
-automotive_basicmath_large_$(TARGET): automotive_basicmath
+basicmath_large_$(TARGET): automotive_basicmath
 	mv automotive/basicmath/basicmath_large basicmath_large_$(TARGET)
  
 
 automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
 
-automotive_bitcount_$(TARGET): automotive_bitcount
+bitcount_$(TARGET): automotive_bitcount
 	mv automotive/bitcount/bitcnts bitcnts_$(TARGET)
 
 
 automotive_qsort:
 	$(MAKE) -C automotive/qsort
 
-automotive_qsort_small_$(TARGET): automotive_qsort
+qsort_small_$(TARGET): automotive_qsort
 	mv automotive/qsort/qsort_small qsort_small_$(TARGET)
 
-automotive_qsort_large_$(TARGET):
+qsort_large_$(TARGET):
 	mv automotive/qsort/qsort_large qsort_large_$(TARGET)
 
 
 automotive_susan:
 	$(MAKE) -C automotive/susan
 
-automotive_susan_$(TARGET): automotive_susan
+susan_$(TARGET): automotive_susan
 	mv automotive/susan/susan susan_$(TARGET)
 
 
 consumer_jpeg:
 	$(MAKE) -C consumer/jpeg/jpeg-6a
 
-consumer_jpeg_$(TARGET): consumer_jpeg
+cjpeg_$(TARGET): consumer_jpeg
 	mv consumer/jpeg/jpeg-6a/cjpeg cjpeg_$(TARGET)
+
+djpeg_$(TARGET): consumer_jpeg
 	mv consumer/jpeg/jpeg-6a/djpeg djpeg_$(TARGET)
 
 
 consumer_lame:
 	$(MAKE) -C consumer/lame/lame3.70
 
-consumer_lame_$(TARGET): consumer_lame
+lame_$(TARGET): consumer_lame
 	mv consumer/lame/lame3.70/lame lame_$(TARGET)
 
 
 consumer_typeset:
 	$(MAKE) -C consumer/typeset/lout-3.24
 
-consumer_typeset_$(TARGET): consumer_typeset
+typeset_$(TARGET): consumer_typeset
 	mv consumer/typeset/lout-3.24/lout lout_$(TARGET)
+
 
 network_dijkstra:
 	$(MAKE) -C network/dijkstra
+
+dijkstra_small_$(TARGET): network_dijkstra
+	mv network/dijkstra/dijkstra_small dijkstra_small_$(TARGET)	
+
+dijkstra_large_$(TARGET): network_dijkstra
+	mv network/dijkstra/dijkstra_large dijkstra_large_$(TARGET)	
+
+
 
 network_patricia:
 	$(MAKE) -C network/patricia
