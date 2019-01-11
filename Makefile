@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET)
 
 
 automotive_basicmath:
@@ -98,6 +98,9 @@ blowfish_$(TARGET): security_blowfish
 security_sha:
 	$(MAKE) -C security/sha
 
+sha_$(TARGET): security_sha
+	mv security/sha/sha sha_$(TARGET)
+
 telecomm_CRC32:
 	$(MAKE) -C telecomm/CRC32
 
@@ -138,6 +141,7 @@ telecomm_gsm:
 	$(MAKE) -C security/blowfish clean
 	-rm blowfish_*
 	$(MAKE) -C security/sha clean
+	-rm sha_*
 	$(MAKE) -C telecomm/CRC32 clean
 	$(MAKE) -C telecomm/FFT clean
 	$(MAKE) -C telecomm/adpcm/src clean 
