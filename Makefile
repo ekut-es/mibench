@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET) rawcaudio_$(TARGET) rawdaudio_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET) rawcaudio_$(TARGET) rawdaudio_$(TARGET) toast_$(TARGET) untoast_$(TARGET)
 
 
 automotive_basicmath:
@@ -129,6 +129,12 @@ rawdaudio_$(TARGET): telecomm_adpcm
 telecomm_gsm:
 	$(MAKE) -C telecomm/gsm
 
+toast_$(TARGET): telecomm_gsm
+	mv telecomm/gsm/bin/toast toast_$(TARGET)
+
+untoast_$(TARGET): telecomm_gsm
+	mv telecomm/gsm/bin/untoast untoast_$(TARGET)
+
 
 .PHONY clean:
 	$(MAKE) -C automotive/basicmath clean
@@ -166,3 +172,5 @@ telecomm_gsm:
 	-rm rawcaudio_*
 	-rm rawdaudio_*
 	$(MAKE) -C telecomm/gsm clean 
+	-rm toast_*
+	-rm untoast_*

@@ -402,3 +402,5 @@ crc_*
 fft_*
 rawcaudio_*
 rawdaudio_*
+toast_*
+untoast_*
