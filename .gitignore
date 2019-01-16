@@ -385,22 +385,4 @@ telecomm/gsm/src/toast_audio.o
 telecomm/gsm/src/toast_lin.o
 telecomm/gsm/src/toast_ulaw.o
 
-basicmath_*
-bitcnts_*
-qsort_*
-susan_*
-cjpeg_*
-djpeg_*
-lame_*
-lout_*
-dijkstra_*
-patricia_*
-stringsearch_*
-blowfish_*
-sha_*
-crc_*
-fft_*
-rawcaudio_*
-rawdaudio_*
-toast_*
-untoast_*
+bin
