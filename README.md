@@ -32,3 +32,6 @@ Command:
 * `qsort_small` run `python input_generation/generate_qsort_small_input.py [NUMBER_OF_WORDS]` which generates the file `input_data/qsort_small_input.txt`
 * `qsort_large` run `python input_generation/generate_qsort_large_input.py [NUMBER_OF_VECTORS]` which generates the file `input_data/qsort_large_input.txt`
 * `susan` run `python input_generation/generate_susan_input.py [WIDTH] [HEIGHT]` which generates the file `input_data/susan_input.pgm`
+
+### `consumer`
+* `jpeg` run `python input_generation/generate_jpeg_input.py [WIDTH] [HEIGHT]`  which generate the file `input/jpeg_input.ppm`
