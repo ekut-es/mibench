@@ -17,6 +17,15 @@ Command:
 ```
 
 ## Build
+* set `TARGET`, `CC` and `CFLAGS`
+* run `make`
+* after successful compilation all binaries can be found in `bin`
+
 ### Not Included
 `consumer/mad` uses configure
 `office/rsynth` uses configure
+
+## Input Generation
+### `automotive`
+* `basicmath` has no input
+* `bitcount` input number in `runme_variable.sh` can be adjusted by `export BITCOUNT_INPUT=<X>` where as `<X>` is a positive integer (larger `<X>` means longer runtime)
