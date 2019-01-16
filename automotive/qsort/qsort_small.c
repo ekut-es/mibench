@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define UNLIMIT
-#define MAXARRAY 60000 /* this number, if too large, will cause a seg. fault!! */
+#define MAXARRAY 100000 /* this number, if too large, will cause a seg. fault!! */
 
 struct myStringStruct {
   char qstring[128];
