@@ -35,3 +35,4 @@ Command:
 
 ### `consumer`
 * `jpeg` run `python input_generation/generate_jpeg_input.py [WIDTH] [HEIGHT]`  which generate the file `input/jpeg_input.ppm`
+* `lame` run `python input_generation/generate_lame_input.py [SECONDS]`  which generate the file `input/lame_input.wav`
