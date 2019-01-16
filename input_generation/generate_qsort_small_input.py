@@ -4,7 +4,7 @@ import string
 import random
 
 def usage():
-    print("python " + __file__ + "[NUMBER_OF_WORDS]")
+    print("python " + __file__ + " [NUMBER_OF_WORDS]")
 
 if len(sys.argv) != 2 :
     print("ERROR: wrong number of parameters!")
@@ -21,5 +21,5 @@ f_path = str(os.path.dirname(os.path.realpath(__file__))) + str("/../input_data/
 f = open(f_path, "w")
 
 for i in range(number_of_words):
-    f.write(''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(5,20))))
+    f.write(''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(min_word_length, max_word_length))))
     f.write("\n")
