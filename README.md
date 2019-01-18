@@ -34,5 +34,6 @@ Command:
 * `susan` run `python input_generation/generate_susan_input.py [WIDTH] [HEIGHT]` which generates the file `input_data/susan_input.pgm`
 
 ### `consumer`
-* `jpeg` run `python input_generation/generate_jpeg_input.py [WIDTH] [HEIGHT]`  which generate the file `input/jpeg_input.ppm`
-* `lame` run `python input_generation/generate_lame_input.py [SECONDS]`  which generate the file `input/lame_input.wav`
+* `jpeg` run `python input_generation/generate_jpeg_input.py [WIDTH] [HEIGHT]`  which generates the file `input/jpeg_input.ppm`
+* `lame` run `python input_generation/generate_lame_input.py [SECONDS]`  which generates the file `input/lame_input.wav`
+* `typeset` run `python input_generation/generate_typeset_input.py [WORDS]`  which generates the file `input/typeset_input.lout`
