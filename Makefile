@@ -1,6 +1,6 @@
 #all: automotive_basicmath automotive_bitcount automotive_qsort automotive_susan consumer_jpeg consumer_lame consumer_typeset network_dijkstra network_patricia office_stringsearch security_blowfish security_sha telecomm_CRC32 telecomm_FFT telecomm_adpcm
 
-all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_small_$(TARGET) dijkstra_large_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET) rawcaudio_$(TARGET) rawdaudio_$(TARGET) toast_$(TARGET) untoast_$(TARGET)
+all: basicmath_small_$(TARGET) basicmath_large_$(TARGET) bitcount_$(TARGET) qsort_small_$(TARGET) qsort_large_$(TARGET) susan_$(TARGET) cjpeg_$(TARGET) djpeg_$(TARGET) lame_$(TARGET) typeset_$(TARGET) dijkstra_$(TARGET) patricia_$(TARGET) stringsearch_small_$(TARGET) stringsearch_large_$(TARGET) blowfish_$(TARGET) sha_$(TARGET) crc_$(TARGET) fft_$(TARGET) rawcaudio_$(TARGET) rawdaudio_$(TARGET) toast_$(TARGET) untoast_$(TARGET)
 
 bin: 
 	mkdir bin
@@ -66,11 +66,8 @@ typeset_$(TARGET): bin consumer_typeset
 network_dijkstra:
 	$(MAKE) -C network/dijkstra
 
-dijkstra_small_$(TARGET): bin network_dijkstra
-	mv network/dijkstra/dijkstra_small bin/dijkstra_small_$(TARGET)	
-
-dijkstra_large_$(TARGET): bin network_dijkstra
-	mv network/dijkstra/dijkstra_large bin/dijkstra_large_$(TARGET)	
+dijkstra_$(TARGET): bin network_dijkstra
+	mv network/dijkstra/dijkstra bin/dijkstra_$(TARGET)	
 
 
 network_patricia:

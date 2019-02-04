@@ -14,7 +14,7 @@ if len(sys.argv) != 2 :
 
 random.seed(42)
 
-f_path = str(os.path.dirname(os.path.realpath(__file__))) + str("/../input_data/") + str("dijkstra_small_input.dat")
+f_path = str(os.path.dirname(os.path.realpath(__file__))) + str("/../input_data/") + str("dijkstra_input.dat")
 f = open(f_path, "w")
 
 min_dist = 1

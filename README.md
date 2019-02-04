@@ -39,4 +39,4 @@ Command:
 * `typeset` run `python input_generation/generate_typeset_input.py [WORDS]`  which generates the file `input_data/typeset_input.lout`
 
 ### `network`
-* `dijkstra_small` run `python input_generation/generate_dijkstra_small_input.py [NUM_NODES]` which generates the file `input_data/dijkstra_small_input.dat`
+* `dijkstra` run `python input_generation/generate_dijkstra_input.py [NUM_NODES]` which generates the file `input_data/dijkstra_input.dat`
