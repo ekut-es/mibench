@@ -40,3 +40,4 @@ Command:
 
 ### `network`
 * `dijkstra` run `python input_generation/generate_dijkstra_input.py [NUM_NODES]` which generates the file `input_data/dijkstra_input.dat`
+* `patricia` run `python input_generateion/generate_patricia_input.py [DURATION] [EVENTS]` which generates the file `input_data/patricia_input.udp`
