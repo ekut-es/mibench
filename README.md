@@ -44,3 +44,4 @@ Command:
 
 ### `security`
 * `blowfish` run `python input_generation/generate_blowfish_input.py [CHARS]` which generates the file `input_data/blowfish_input.asc`
+* `sha` run `python input_generation/generate_sha_input.py [CHARS]` which generates the file `input_data/sha_input.asc`
