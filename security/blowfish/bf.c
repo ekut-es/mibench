@@ -90,7 +90,7 @@ while(!feof(fp))
 close(fp);
 close(fp2);
 
-exit(1);
+exit(0);
 }
 
 
