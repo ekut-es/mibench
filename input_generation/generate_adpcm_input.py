@@ -2,7 +2,6 @@ import sys
 import os
 import random
 import struct
-from lorem.text import TextLorem
 
 def usage():
     print("python " + __file__ + " [BYTES]")
