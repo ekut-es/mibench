@@ -50,3 +50,4 @@ Command:
 * `crc` run `python input_generation/generate_crc_input.py [BYTES]` which generates the file `input_data/crc_input.pcm`
 * `fft` input waves ans lengths in `runme_variable.sh` can be adjusted by `export FFT_WAVES=<X>` and `export FFT_LENGTH=<Y>` where as `<X>` and `<Y>` are postive integers (larger `<X>` and `<Y>` mean longer runtime)
 * `adpcm` run `python input_generation/generate_adpcm_input.py [BYTES]` which generates the file `input_data/adpcm_input.pcm`
+* `gsm` run `python input_generation/generate_gsm_input.py [BYTES]` which generates the file `input_data/gsm_input.pcm`

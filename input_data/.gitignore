@@ -11,3 +11,4 @@ blowfish_input.asc
 sha_input.asc
 crc_input.pcm
 adpcm_input.pcm
+gsm_input.au
