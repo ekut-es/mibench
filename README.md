@@ -12,7 +12,7 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
  * `office/rsynth` uses configure
 
 ## Build
- * set `TARGET`, `CC` and `CFLAGS`
+ * set `PLATFORM`, `CC` and `CFLAGS`
  * run `make`
  * after successful compilation all binaries can be found in `bin`
 

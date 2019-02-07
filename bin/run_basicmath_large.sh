@@ -1,2 +1,2 @@
 #!/bin/bash
-./basicmath_large_${TARGET} > basicmath_large_output.txt
+./basicmath_large_${PLATFORM} > basicmath_large_output.txt
