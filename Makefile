@@ -174,3 +174,5 @@ untoast_$(TARGET): bin telecomm_gsm
 	-rm -rf bin/susan_*
 	-rm -rf bin/toast_*
 	-rm -rf bin/untoast_*
+	-rm -rf bin/*output*
+	-rm -rf bin/lout.li
