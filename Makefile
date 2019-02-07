@@ -19,7 +19,7 @@ automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
 
 bitcount_$(TARGET): bin automotive_bitcount
-	mv automotive/bitcount/bitcnts bin/bitcnts_$(TARGET)
+	mv automotive/bitcount/bitcnts bin/bitcount_$(TARGET)
 
 
 automotive_qsort:
@@ -152,4 +152,25 @@ untoast_$(TARGET): bin telecomm_gsm
 	$(MAKE) -C telecomm/FFT clean
 	$(MAKE) -C telecomm/adpcm/src clean 
 	$(MAKE) -C telecomm/gsm clean 
-	-rm -rf bin
+	-rm -rf bin/basicmath_large_*
+	-rm -rf bin/basicmath_small_*
+	-rm -rf bin/bitcount_*
+	-rm -rf bin/blowfish_*
+	-rm -rf bin/cjpeg_*
+	-rm -rf bin/crc_*
+	-rm -rf bin/dijkstra_*
+	-rm -rf bin/djpeg_*
+	-rm -rf bin/fft_*
+	-rm -rf bin/lame_*
+	-rm -rf bin/lout_*
+	-rm -rf bin/patricia_*
+	-rm -rf bin/qsort_large_*
+	-rm -rf bin/qsort_small_*
+	-rm -rf bin/rawcaudio_*
+	-rm -rf bin/rawdaudio_*
+	-rm -rf bin/sha_*
+	-rm -rf bin/stringsearch_large_*
+	-rm -rf bin/stringsearch_small_*
+	-rm -rf bin/susan_*
+	-rm -rf bin/toast_*
+	-rm -rf bin/untoast_*
