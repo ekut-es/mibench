@@ -301,12 +301,9 @@ PDF_COMPRESSION	= 0
 ZLIB		=
 ZLIBPATH	=
 
-CC	= gcc
-LD	= gcc 
-
 RCOPY	= cp -r
 
-COPTS	= -ansi -pedantic -Wall -O3
+COPTS	:= -ansi -pedantic -Wall -O3 $(CFLAGS)
 # COPTS	= -ansi -pedantic -Wall
 
 CFLAGS	= -DOS_UNIX=$(OSUNIX)					\
@@ -341,7 +338,7 @@ OBJS	= z01.o z02.o z03.o z04.o z05.o z06.o z07.o z08.o	\
 	  z49.o z50.o z51.o
 
 lout:	$(OBJS)
-	$(LD) -o lout $(OBJS) $(ZLIB) -lm
+	$(CC) -o lout $(OBJS) $(ZLIB) -lm
 	chmod a+x lout
 
 $(OBJS): externs.h

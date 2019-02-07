@@ -11,8 +11,7 @@ ARCH = $(shell uname -m)
 
 # defaults:
 PGM = lame
-CC = gcc
-CC_OPTS =  -O
+CC_OPTS =  -O $(CFLAGS)
 GTK = 
 GTKLIBS = 
 SNDLIB = -DLAMESNDFILE
@@ -22,7 +21,7 @@ MAKEDEP = -M
 BRHIST_SWITCH = 
 LIBTERMCAP = 
 RM = rm -f
-CPP_OPTS = -DHAVEMPGLIB -DLAMEPARSE
+CPP_OPTS = -DHAVEMPGLIB -DLAMEPARSE $(CFLAGS)
 
 
 

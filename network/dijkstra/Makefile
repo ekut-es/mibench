@@ -1,10 +1,7 @@
-all:  dijkstra_large dijkstra_small
+all:  dijkstra
 
-dijkstra_large: dijkstra_large.c Makefile
-	gcc dijkstra_large.c -O3 -o dijkstra_large
-
-dijkstra_small: dijkstra_small.c Makefile
-	gcc dijkstra_small.c -O3 -o dijkstra_small 
+dijkstra: dijkstra.c Makefile
+	$(CC) $(CFLAGS) dijkstra.c -O3 -o dijkstra
 
 clean:
-	rm -rf dijkstra_large dijkstra_small output*
+	rm -rf dijkstra output*

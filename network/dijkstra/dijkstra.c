@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUM_NODES                          100
 #define NONE                               9999
 
 struct _NODE
@@ -23,12 +22,15 @@ typedef struct _QITEM QITEM;
 QITEM *qHead = NULL;
 
              
+int num_nodes;             
              
-             
-int AdjMatrix[NUM_NODES][NUM_NODES];
+//int AdjMatrix[NUM_NODES][NUM_NODES];
+int** AdjMatrix;
 
 int g_qCount = 0;
-NODE rgnNodes[NUM_NODES];
+
+NODE* rgnNodes;
+
 int ch;
 int iPrev, iNode;
 int i, iCost, iDist;
@@ -101,7 +103,7 @@ int dijkstra(int chStart, int chEnd)
   
 
   
-  for (ch = 0; ch < NUM_NODES; ch++)
+  for (ch = 0; ch < num_nodes; ch++)
     {
       rgnNodes[ch].iDist = NONE;
       rgnNodes[ch].iPrev = NONE;
@@ -121,7 +123,7 @@ int dijkstra(int chStart, int chEnd)
      while (qcount() > 0)
 	{
 	  dequeue (&iNode, &iDist, &iPrev);
-	  for (i = 0; i < NUM_NODES; i++)
+	  for (i = 0; i < num_nodes; i++)
 	    {
 	      if ((iCost = AdjMatrix[iNode][i]) != NONE)
 		{
@@ -147,17 +149,27 @@ int main(int argc, char *argv[]) {
   int i,j,k;
   FILE *fp;
   
-  if (argc<2) {
-    fprintf(stderr, "Usage: dijkstra <filename>\n");
-    fprintf(stderr, "Only supports matrix size is #define'd.\n");
+  if (argc<3) {
+    fprintf(stderr, "Usage: dijkstra <NUM_NODES> <INPUT_FILE>\n");
+    //fprintf(stderr, "Only supports matrix size is #define'd.\n");
   }
 
+  num_nodes = atoi(argv[1]);
+
+    rgnNodes = (NODE*) malloc(num_nodes*sizeof(NODE));
+
+    AdjMatrix = (int**) malloc(num_nodes*sizeof(int*));
+
+    for(i = 0; i < num_nodes; i++) {
+        AdjMatrix[i] = (int*) malloc(num_nodes*sizeof(int));
+    }
+
   /* open the adjacency matrix file */
-  fp = fopen (argv[1],"r");
+  fp = fopen (argv[2],"r");
 
   /* make a fully connected matrix */
-  for (i=0;i<NUM_NODES;i++) {
-    for (j=0;j<NUM_NODES;j++) {
+  for (i=0;i<num_nodes;i++) {
+    for (j=0;j<num_nodes;j++) {
       /* make it more sparce */
       fscanf(fp,"%d",&k);
 			AdjMatrix[i][j]= k;
@@ -165,11 +177,19 @@ int main(int argc, char *argv[]) {
   }
 
   /* finds 10 shortest paths between nodes */
-  for (i=0,j=NUM_NODES/2;i<100;i++,j++) {
-			j=j%NUM_NODES;
+  for (i=0,j=num_nodes/2;i<20;i++,j++) {
+		j=j%num_nodes;
       dijkstra(i,j);
   }
+
+  free(rgnNodes);
+
+  for(i = 0; i < num_nodes; i++) {
+      free(AdjMatrix[i]);
+  }
+
+  free(AdjMatrix);
+
   exit(0);
-  
 
 }

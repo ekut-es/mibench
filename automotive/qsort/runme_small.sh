@@ -1,2 +1,2 @@
 #!/bin/sh
-qsort_small input_small.dat > output_small.txt
+qsort_small $(wc -l input_small.dat) input_small.dat > output_small.txt

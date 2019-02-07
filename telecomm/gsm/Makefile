@@ -32,10 +32,10 @@ SASR	= -DSASR
 # CC		= /usr/lang/acc
 # CCFLAGS 	= -c -O
 
-CC		= gcc -ansi -pedantic
+CC		= gcc 
 # ARM gcc doesn't like the -O1 here...
 #CCFLAGS 	= -c -O1 -DSTUPID_COMPILER -DNeedFunctionPrototypes=1
-CCFLAGS 	= -c -O3 -DSTUPID_COMPILER -DNeedFunctionPrototypes=1
+CCFLAGS 	= -ansi -pedantic -c -O3 -DSTUPID_COMPILER -DNeedFunctionPrototypes=1
 
 LD 		= $(CC)
 
