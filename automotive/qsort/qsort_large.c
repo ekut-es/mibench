@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 
-#define UNLIMIT
-#define MAXARRAY 100000 /* this number, if too large, will cause a seg. fault!! */
 
 struct my3DVertexStruct {
   int x, y, z;
@@ -26,19 +24,22 @@ int compare(const void *elem1, const void *elem2)
 
 int
 main(int argc, char *argv[]) {
-  struct my3DVertexStruct array[MAXARRAY];
+  struct my3DVertexStruct* array;
+  int size;
   FILE *fp;
   int i,count=0;
   int x, y, z;
   
-  if (argc<2) {
-    fprintf(stderr,"Usage: qsort_large <file>\n");
+  if (argc<3) {
+    fprintf(stderr,"Usage: qsort_large <size> <file>\n");
     exit(-1);
   }
   else {
-    fp = fopen(argv[1],"r");
+    size = atoi(argv[1]);
+    array = (struct my3DVertexStruct*) malloc(size*sizeof(struct my3DVertexStruct));
+    fp = fopen(argv[2],"r");
     
-    while((fscanf(fp, "%d", &x) == 1) && (fscanf(fp, "%d", &y) == 1) && (fscanf(fp, "%d", &z) == 1) &&  (count < MAXARRAY)) {
+    while((fscanf(fp, "%d", &x) == 1) && (fscanf(fp, "%d", &y) == 1) && (fscanf(fp, "%d", &z) == 1) &&  (count < size)) {
 	 array[count].x = x;
 	 array[count].y = y;
 	 array[count].z = z;
@@ -51,5 +52,7 @@ main(int argc, char *argv[]) {
   
   for(i=0;i<count;i++)
     printf("%d %d %d\n", array[i].x, array[i].y, array[i].z);
+
+  free(array);
   return 0;
 }

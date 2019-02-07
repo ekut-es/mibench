@@ -1,2 +1,2 @@
 #!/bin/sh
-qsort_large input_large.dat > output_large.txt
+./qsort_large $(wc -l input_large.dat) input_large.dat > output_large.txt
