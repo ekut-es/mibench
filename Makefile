@@ -1,3 +1,6 @@
+TIME=/usr/bin/time
+TIME_FORMAT="%Es\telapsed\n%Us\tuser\n%Ss\tsystem\n%MkB\n"
+
 all: basicmath_small_$(PLATFORM) basicmath_large_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_small_$(PLATFORM) stringsearch_large_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
 bin: 
@@ -132,6 +135,48 @@ toast_$(PLATFORM): bin telecomm_gsm
 untoast_$(PLATFORM): bin telecomm_gsm
 	mv telecomm/gsm/bin/untoast bin/untoast_$(PLATFORM)
 
+generate_input: 
+    
+
+run:
+	@echo adpcm
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_adpcm.sh
+	@echo basicmath_large
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_basicmath_large.sh
+	@echo basicmath_small
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_basicmath_small.sh
+	@echo bitcount
+	cd bin; export BITCOUNT_INPUT=140000000; $(TIME) -f $(TIME_FORMAT) ./run_bitcount.sh
+	@echo blowfish
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_blowfish.sh
+	@echo crc
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_crc.sh
+	@echo dijkstra
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_dijkstra.sh
+	@echo fft
+	cd bin; export FFT_WAVES=2048; export FFT_LENGTH=32768; $(TIME) -f $(TIME_FORMAT) ./run_fft.sh
+	@echo gsm
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_gsm.sh
+	@echo jpeg
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_jpeg.sh
+	@echo lame
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_lame.sh
+	@echo patricia
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_patricia.sh
+	@echo qsort_large
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_qsort_large.sh
+	@echo qsort_small
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_qsort_small.sh
+	@echo sha
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_sha.sh
+	@echo stringsearch_large
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_stringsearch_large.sh
+	@echo stringsearch_small
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_stringsearch_small.sh
+	@echo susan
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_susan.sh
+	@echo typeset
+	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_typeset.sh
 
 .PHONY clean:
 	$(MAKE) -C automotive/basicmath clean
