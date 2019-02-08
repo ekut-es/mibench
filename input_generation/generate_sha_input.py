@@ -24,13 +24,13 @@ char_count = 0
 text = str()
 prob_paragraph = 1/100
 
+f = open(f_path, "w")
+
 while(char_count < chars):
     sentence = lorem.sentence()[:-1]
     char_count = char_count + len(sentence)
-    text = text + sentence
+    f.write(sentence)
     if(random.uniform(0,1) > 1-prob_paragraph):
-        text = text + "\n"
+        f.write("\n")
 
-f = open(f_path, "w")
-f.write(text)
 f.close()
