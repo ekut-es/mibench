@@ -17,12 +17,9 @@ bytes = int(sys.argv[1])
 
 f_path = str(os.path.dirname(os.path.realpath(__file__))) + str("/../input_data/") + str("crc_input.pcm")
 
-byte_string = []
+f = open(f_path, "wb")
 
 for i in range(0,bytes):
-    byte_string.append(random.randint(0,255))
+    f.write(struct.pack('B', random.randint(0,255)))
 
-f = open(f_path, "wb")
-format_string = str(len(byte_string)) + 'B'
-f.write(struct.pack(format_string, *byte_string))
 f.close()
