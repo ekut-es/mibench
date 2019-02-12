@@ -401,8 +401,7 @@ bin/qsort_small_*
 bin/rawcaudio_*
 bin/rawdaudio_*
 bin/sha_*
-bin/stringsearch_large_*
-bin/stringsearch_small_*
+bin/stringsearch_*
 bin/susan_*
 bin/toast_*
 bin/untoast_*
