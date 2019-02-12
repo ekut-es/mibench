@@ -18,8 +18,8 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
 
 ## Input Generation
 ### `automotive`
- * `basicmath` has no input
- * `bitcount` input number in `runme_variable.sh` can be adjusted by `export BITCOUNT_INPUT=<X>` where as `<X>` is a positive integer (larger `<X>` means longer runtime)
+ * `bitcount` number of runs can be adjusted by `export BASICMATH_RUNS=<X>` where as `<X>` is a positive integer (larger `<X>` means longer runtime)
+ * `bitcount` input number be adjusted by `export BITCOUNT_INPUT=<X>` where as `<X>` is a positive integer (larger `<X>` means longer runtime)
  * `qsort_small` run `python input_generation/generate_qsort_small_input.py [NUMBER_OF_WORDS]` which generates the file `input_data/qsort_small_input.txt`
  * `qsort_large` run `python input_generation/generate_qsort_large_input.py [NUMBER_OF_VECTORS]` which generates the file `input_data/qsort_large_input.txt`
  * `susan` run `python input_generation/generate_susan_input.py [WIDTH] [HEIGHT]` which generates the file `input_data/susan_input.pgm`

@@ -385,8 +385,7 @@ telecomm/gsm/src/toast_audio.o
 telecomm/gsm/src/toast_lin.o
 telecomm/gsm/src/toast_ulaw.o
 
-bin/basicmath_large_*
-bin/basicmath_small_*
+bin/basicmath_*
 bin/bitcount_*
 bin/blowfish_*
 bin/cjpeg_*

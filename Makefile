@@ -1,7 +1,7 @@
 TIME=/usr/bin/time
 TIME_FORMAT="%Es\telapsed\n%Us\tuser\n%Ss\tsystem\n%MkB\n"
 
-all: basicmath_small_$(PLATFORM) basicmath_large_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_small_$(PLATFORM) stringsearch_large_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
+all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_small_$(PLATFORM) stringsearch_large_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
 bin: 
 	mkdir bin
@@ -9,12 +9,9 @@ bin:
 automotive_basicmath:
 	$(MAKE) -C automotive/basicmath
 
-basicmath_small_$(PLATFORM): bin automotive_basicmath
-	mv automotive/basicmath/basicmath_small bin/basicmath_small_$(PLATFORM)
+basicmath_$(PLATFORM): bin automotive_basicmath
+	mv automotive/basicmath/basicmath bin/basicmath_$(PLATFORM)
 
-basicmath_large_$(PLATFORM): bin automotive_basicmath
-	mv automotive/basicmath/basicmath_large bin/basicmath_large_$(PLATFORM)
- 
 
 automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
@@ -195,8 +192,7 @@ run:
 	$(MAKE) -C telecomm/FFT clean
 	$(MAKE) -C telecomm/adpcm/src clean 
 	$(MAKE) -C telecomm/gsm clean 
-	-rm -rf bin/basicmath_large_*
-	-rm -rf bin/basicmath_small_*
+	-rm -rf bin/basicmath_*
 	-rm -rf bin/bitcount_*
 	-rm -rf bin/blowfish_*
 	-rm -rf bin/cjpeg_*

@@ -1,2 +1,2 @@
 #!/bin/sh
-./basicmath_large > output_large.txt
+./basicmath 100 > output_large.txt
