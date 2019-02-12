@@ -1,2 +1,2 @@
 #!/bin/sh
-./search_large > output_large.txt
+./search 100 > output_large.txt

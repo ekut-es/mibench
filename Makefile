@@ -1,7 +1,7 @@
 TIME=/usr/bin/time
 TIME_FORMAT="%Es\telapsed\n%Us\tuser\n%Ss\tsystem\n%MkB\n"
 
-all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_small_$(PLATFORM) stringsearch_large_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
+all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
 bin: 
 	mkdir bin
@@ -78,11 +78,8 @@ patricia_$(PLATFORM): bin network_patricia
 office_stringsearch:
 	$(MAKE) -C office/stringsearch
 
-stringsearch_small_$(PLATFORM): bin office_stringsearch
-	mv office/stringsearch/search_small bin/stringsearch_small_$(PLATFORM)
-
-stringsearch_large_$(PLATFORM): bin office_stringsearch
-	mv office/stringsearch/search_large bin/stringsearch_large_$(PLATFORM)
+stringsearch_$(PLATFORM): bin office_stringsearch
+	mv office/stringsearch/search bin/stringsearch_$(PLATFORM)
 
 
 security_blowfish:
@@ -208,8 +205,7 @@ run:
 	-rm -rf bin/rawcaudio_*
 	-rm -rf bin/rawdaudio_*
 	-rm -rf bin/sha_*
-	-rm -rf bin/stringsearch_large_*
-	-rm -rf bin/stringsearch_small_*
+	-rm -rf bin/stringsearch_*
 	-rm -rf bin/susan_*
 	-rm -rf bin/toast_*
 	-rm -rf bin/untoast_*

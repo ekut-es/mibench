@@ -33,6 +33,9 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
  * `dijkstra` run `python input_generation/generate_dijkstra_input.py [NUM_NODES]` which generates the file `input_data/dijkstra_input.dat`
  * `patricia` run `python input_generateion/generate_patricia_input.py [DURATION] [EVENTS]` which generates the file `input_data/patricia_input.udp`
 
+### `office`
+ * `stringsearch` number of runs can be adjusted by `export STRINGSEARCH_RUNS=<X>` where as `<X>` is a positive integer (larger `<X>` means longer runtime)
+
 ### `security`
  * `blowfish` run `python input_generation/generate_blowfish_input.py [CHARS]` which generates the file `input_data/blowfish_input.asc`
  * `sha` run `python input_generation/generate_sha_input.py [CHARS]` which generates the file `input_data/sha_input.asc`
