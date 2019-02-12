@@ -24,8 +24,11 @@ CFLAGS := -O3 $(CFLAGS)
 ALLSRC=README adpcm.2 Makefile adpcm.h libst.h adpcm.c timing.c rawcaudio.c \
 	rawdaudio.c suncaudio.c sgicaudio.c sgidaudio.c hello.adpcm.uu
 
-all: adpcm.o rawcaudio rawdaudio timing
+all: ../bin adpcm.o rawcaudio rawdaudio timing
 	cp rawcaudio rawdaudio timing ../bin/.
+
+../bin:
+	mkdir ../bin
 
 sgi: all sgicaudio sgidaudio
 
