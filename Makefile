@@ -1,6 +1,25 @@
 TIME=/usr/bin/time
 TIME_FORMAT="%Es\telapsed\n%Us\tuser\n%Ss\tsystem\n%MkB\n"
 
+ADPCM_INPUT=300000000
+BASICMATH_RUNS=20
+BITCOUNT_INPUT=140000000
+BLOWFISH_INPUT=120000000
+CRC_INPUT=1200000000
+DIJKSTRA_INPUT=2000
+FFT_WAVES=2048
+FFT_LENGTH=32768
+GSM_INPUT=51000000
+JPEG_INPUT=6500 6500
+LAME_INPUT=700
+PATRICIA_INPUT=2000 5500
+QSORT_LARGE_INPUT=10000000
+QSORT_SMALL_INPUT=9500000
+SHA_INPUT=1100000000
+STRINGSEARCH_RUNS=5500
+SUSAN_INPUT=2500 2500
+TYPESET_INPUT=7000000
+
 all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
 bin: 
@@ -130,17 +149,27 @@ untoast_$(PLATFORM): bin telecomm_gsm
 	mv telecomm/gsm/bin/untoast bin/untoast_$(PLATFORM)
 
 generate_input: 
-    
+	python input_generation/generate_adpcm_input.py $(ADPCM_INPUT)
+	python input_generation/generate_blowfish_input.py $(BLOWFISH_INPUT) 
+	python input_generation/generate_crc_input.py $(CRC_INPUT) 
+	python input_generation/generate_dijkstra_input.py $(DIJKSTRA_INPUT) 
+	python input_generation/generate_gsm_input.py $(GSM_INPUT) 
+	python input_generation/generate_jpeg_input.py $(JPEG_INPUT) 
+	python input_generation/generate_lame_input.py $(LAME_INPUT)
+	python input_generation/generate_patricia_input.py $(PATRICIA_INPUT) 
+	python input_generation/generate_qsort_large_input.py $(QSORT_LARGE_INPUT) 
+	python input_generation/generate_qsort_small_input.py $(QSORT_SMALL_INPUT) 
+	python input_generation/generate_sha_input.py $(SHA_INPUT) 
+	python input_generation/generate_susan_input.py $(SUSAN_INPUT) 
+	python input_generation/generate_typeset_input.py $(TYPESET_INPUT) 
 
 run:
 	@echo adpcm
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_adpcm.sh
-	@echo basicmath_large
-	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_basicmath_large.sh
-	@echo basicmath_small
-	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_basicmath_small.sh
+	@echo basicmath
+	cd bin; export BASICMATH_RUNS=$(BASICMATH_RUNS); $(TIME) -f $(TIME_FORMAT) ./run_basicmath.sh
 	@echo bitcount
-	cd bin; export BITCOUNT_INPUT=140000000; $(TIME) -f $(TIME_FORMAT) ./run_bitcount.sh
+	cd bin; export BITCOUNT_INPUT=$(BITCOUNT_INPUT); $(TIME) -f $(TIME_FORMAT) ./run_bitcount.sh
 	@echo blowfish
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_blowfish.sh
 	@echo crc
@@ -148,7 +177,7 @@ run:
 	@echo dijkstra
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_dijkstra.sh
 	@echo fft
-	cd bin; export FFT_WAVES=2048; export FFT_LENGTH=32768; $(TIME) -f $(TIME_FORMAT) ./run_fft.sh
+	cd bin; export FFT_WAVES=$(FFT_WAVES); export FFT_LENGTH=$(FFT_LENGTH); $(TIME) -f $(TIME_FORMAT) ./run_fft.sh
 	@echo gsm
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_gsm.sh
 	@echo jpeg
@@ -163,10 +192,8 @@ run:
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_qsort_small.sh
 	@echo sha
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_sha.sh
-	@echo stringsearch_large
-	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_stringsearch_large.sh
-	@echo stringsearch_small
-	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_stringsearch_small.sh
+	@echo stringsearch
+	cd bin; export STRINGSEARCH_RUNS=$(STRINGSEARCH_RUNS); $(TIME) -f $(TIME_FORMAT) ./run_stringsearch.sh
 	@echo susan
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_susan.sh
 	@echo typeset
