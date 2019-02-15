@@ -24,27 +24,24 @@ TYPESET_INPUT=7000000
 
 all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
-bin: 
-	mkdir bin
-
 automotive_basicmath:
 	$(MAKE) -C automotive/basicmath
 
-basicmath_$(PLATFORM): bin automotive_basicmath
+basicmath_$(PLATFORM): automotive_basicmath
 	mv automotive/basicmath/basicmath bin/basicmath_$(PLATFORM)
 
 
 automotive_bitcount:
 	$(MAKE) -C automotive/bitcount
 
-bitcount_$(PLATFORM): bin automotive_bitcount
+bitcount_$(PLATFORM): automotive_bitcount
 	mv automotive/bitcount/bitcnts bin/bitcount_$(PLATFORM)
 
 
 automotive_qsort:
 	$(MAKE) -C automotive/qsort
 
-qsort_small_$(PLATFORM): bin automotive_qsort
+qsort_small_$(PLATFORM): automotive_qsort
 	mv automotive/qsort/qsort_small bin/qsort_small_$(PLATFORM)
 
 qsort_large_$(PLATFORM):
@@ -54,100 +51,100 @@ qsort_large_$(PLATFORM):
 automotive_susan:
 	$(MAKE) -C automotive/susan
 
-susan_$(PLATFORM): bin automotive_susan
+susan_$(PLATFORM): automotive_susan
 	mv automotive/susan/susan bin/susan_$(PLATFORM)
 
 
 consumer_jpeg:
 	$(MAKE) -C consumer/jpeg/jpeg-6a
 
-cjpeg_$(PLATFORM): bin consumer_jpeg
+cjpeg_$(PLATFORM): consumer_jpeg
 	mv consumer/jpeg/jpeg-6a/cjpeg bin/cjpeg_$(PLATFORM)
 
-djpeg_$(PLATFORM): bin consumer_jpeg
+djpeg_$(PLATFORM): consumer_jpeg
 	mv consumer/jpeg/jpeg-6a/djpeg bin/djpeg_$(PLATFORM)
 
 
 consumer_lame:
 	$(MAKE) -C consumer/lame/lame3.70
 
-lame_$(PLATFORM): bin consumer_lame
+lame_$(PLATFORM): consumer_lame
 	mv consumer/lame/lame3.70/lame bin/lame_$(PLATFORM)
 
 
 consumer_typeset:
 	$(MAKE) -C consumer/typeset/lout-3.24
 
-typeset_$(PLATFORM): bin consumer_typeset
+typeset_$(PLATFORM): consumer_typeset
 	mv consumer/typeset/lout-3.24/lout bin/lout_$(PLATFORM)
 
 
 network_dijkstra:
 	$(MAKE) -C network/dijkstra
 
-dijkstra_$(PLATFORM): bin network_dijkstra
+dijkstra_$(PLATFORM): network_dijkstra
 	mv network/dijkstra/dijkstra bin/dijkstra_$(PLATFORM)	
 
 
 network_patricia:
 	$(MAKE) -C network/patricia
 
-patricia_$(PLATFORM): bin network_patricia
+patricia_$(PLATFORM): network_patricia
 	mv network/patricia/patricia bin/patricia_$(PLATFORM)
 
 
 office_stringsearch:
 	$(MAKE) -C office/stringsearch
 
-stringsearch_$(PLATFORM): bin office_stringsearch
+stringsearch_$(PLATFORM): office_stringsearch
 	mv office/stringsearch/search bin/stringsearch_$(PLATFORM)
 
 
 security_blowfish:
 	$(MAKE) -C security/blowfish
 
-blowfish_$(PLATFORM): bin security_blowfish
+blowfish_$(PLATFORM): security_blowfish
 	mv security/blowfish/bf bin/blowfish_$(PLATFORM)
 
 
 security_sha:
 	$(MAKE) -C security/sha
 
-sha_$(PLATFORM): bin security_sha
+sha_$(PLATFORM): security_sha
 	mv security/sha/sha bin/sha_$(PLATFORM)
 
 
 telecomm_CRC32:
 	$(MAKE) -C telecomm/CRC32
 
-crc_$(PLATFORM): bin telecomm_CRC32
+crc_$(PLATFORM): telecomm_CRC32
 	mv telecomm/CRC32/crc bin/crc_$(PLATFORM)
 
 
 telecomm_FFT:
 	$(MAKE) -C telecomm/FFT
 
-fft_$(PLATFORM): bin telecomm_FFT
+fft_$(PLATFORM): telecomm_FFT
 	mv telecomm/FFT/fft bin/fft_$(PLATFORM)	
 
 
 telecomm_adpcm:
 	$(MAKE) -C telecomm/adpcm/src
 
-rawcaudio_$(PLATFORM): bin telecomm_adpcm
+rawcaudio_$(PLATFORM): telecomm_adpcm
 	mv telecomm/adpcm/bin/rawcaudio bin/rawcaudio_$(PLATFORM)
 
-rawdaudio_$(PLATFORM): bin telecomm_adpcm
+rawdaudio_$(PLATFORM): telecomm_adpcm
 	mv telecomm/adpcm/bin/rawdaudio bin/rawdaudio_$(PLATFORM)
 	
 
 telecomm_gsm:
 	$(MAKE) -C telecomm/gsm
 
-toast_$(PLATFORM): bin telecomm_gsm
+toast_$(PLATFORM): telecomm_gsm
 	mv telecomm/gsm/bin/toast bin/toast_$(PLATFORM)
 
-untoast_$(PLATFORM): bin telecomm_gsm
+untoast_$(PLATFORM): telecomm_gsm
 	mv telecomm/gsm/bin/untoast bin/untoast_$(PLATFORM)
 
 generate_input: 
