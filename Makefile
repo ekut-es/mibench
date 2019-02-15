@@ -20,6 +20,8 @@ STRINGSEARCH_RUNS=5500
 SUSAN_INPUT=2500 2500
 TYPESET_INPUT=7000000
 
+.PHONY: clean clean_$(PLATFORM)
+
 all: basicmath_$(PLATFORM) bitcount_$(PLATFORM) qsort_small_$(PLATFORM) qsort_large_$(PLATFORM) susan_$(PLATFORM) cjpeg_$(PLATFORM) djpeg_$(PLATFORM) lame_$(PLATFORM) typeset_$(PLATFORM) dijkstra_$(PLATFORM) patricia_$(PLATFORM) stringsearch_$(PLATFORM) blowfish_$(PLATFORM) sha_$(PLATFORM) crc_$(PLATFORM) fft_$(PLATFORM) rawcaudio_$(PLATFORM) rawdaudio_$(PLATFORM) toast_$(PLATFORM) untoast_$(PLATFORM)
 
 bin: 
@@ -199,7 +201,31 @@ run:
 	@echo typeset
 	cd bin; $(TIME) -f $(TIME_FORMAT) ./run_typeset.sh
 
-.PHONY clean:
+.PHONY clean_$(PLATFORM):
+	-rm -rf bin/basicmath_$(PLATFORM)
+	-rm -rf bin/bitcount_$(PLATFORM)
+	-rm -rf bin/blowfish_$(PLATFORM)
+	-rm -rf bin/cjpeg_$(PLATFORM)
+	-rm -rf bin/crc_$(PLATFORM)
+	-rm -rf bin/dijkstra_$(PLATFORM)
+	-rm -rf bin/djpeg_$(PLATFORM)
+	-rm -rf bin/fft_$(PLATFORM)
+	-rm -rf bin/lame_$(PLATFORM)
+	-rm -rf bin/lout_$(PLATFORM)
+	-rm -rf bin/patricia_$(PLATFORM)
+	-rm -rf bin/qsort_large_$(PLATFORM)
+	-rm -rf bin/qsort_small_$(PLATFORM)
+	-rm -rf bin/rawcaudio_$(PLATFORM)
+	-rm -rf bin/rawdaudio_$(PLATFORM)
+	-rm -rf bin/sha_$(PLATFORM)
+	-rm -rf bin/stringsearch_$(PLATFORM)
+	-rm -rf bin/susan_$(PLATFORM)
+	-rm -rf bin/toast_$(PLATFORM)
+	-rm -rf bin/untoast_$(PLATFORM)
+	-rm -rf bin/lout.li
+
+clean:
+	-rm -rf bin/*output*
 	$(MAKE) -C automotive/basicmath clean
 	$(MAKE) -C automotive/bitcount clean
 	$(MAKE) -C automotive/qsort clean
@@ -216,25 +242,3 @@ run:
 	$(MAKE) -C telecomm/FFT clean
 	$(MAKE) -C telecomm/adpcm/src clean 
 	$(MAKE) -C telecomm/gsm clean 
-	-rm -rf bin/basicmath_*
-	-rm -rf bin/bitcount_*
-	-rm -rf bin/blowfish_*
-	-rm -rf bin/cjpeg_*
-	-rm -rf bin/crc_*
-	-rm -rf bin/dijkstra_*
-	-rm -rf bin/djpeg_*
-	-rm -rf bin/fft_*
-	-rm -rf bin/lame_*
-	-rm -rf bin/lout_*
-	-rm -rf bin/patricia_*
-	-rm -rf bin/qsort_large_*
-	-rm -rf bin/qsort_small_*
-	-rm -rf bin/rawcaudio_*
-	-rm -rf bin/rawdaudio_*
-	-rm -rf bin/sha_*
-	-rm -rf bin/stringsearch_*
-	-rm -rf bin/susan_*
-	-rm -rf bin/toast_*
-	-rm -rf bin/untoast_*
-	-rm -rf bin/*output*
-	-rm -rf bin/lout.li
