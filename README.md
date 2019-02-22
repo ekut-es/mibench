@@ -52,3 +52,8 @@ Each benchmark has its own script which is located in `bin`.
 cd bin
 ./run_${PLATFORM}
 ```
+
+## Results
+Those results are obtained with the input generation inputs as specified in the [`Makefile`](./Makefile). Both Intel Systems run Scientific Linux 7.6. The AMD System runs Ubuntu 18.04.
+
+![Runtime Plot](./results/runtime_plot.png)
