@@ -50,5 +50,5 @@ Source Code from: [http://vhosts.eecs.umich.edu/mibench/source.html](http://vhos
 Each benchmark has its own script which is located in `bin`.
 ```
 cd bin
-./run_*
+./run_${PLATFORM}
 ```
