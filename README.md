@@ -54,6 +54,6 @@ cd bin
 ```
 
 ## Results
-Those results are obtained with the input generation inputs as specified in the [`Makefile`](./Makefile). Both Intel Systems run Scientific Linux 7.6. The AMD System runs Ubuntu 18.04.
+Those results are obtained with the input generation inputs as specified in the [`Makefile`](./Makefile). Both Intel Systems run Scientific Linux 7.6. The AMD System runs Ubuntu 18.04. All benchmarks are executed three times using the `/usr/bin/time` command which measures the `system`, `user`, and `real` time. Each bar of the plot shows the `real` time separated into `system` time, `user` time, and the difference of the sum of `system` and `user` time compared to the `real` time. The error bars show the standard deviation of the `real` time for all three executions.
 
 ![Runtime Plot](./results/runtime_plot.png)

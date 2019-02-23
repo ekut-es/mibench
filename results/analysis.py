@@ -111,17 +111,20 @@ i5_6500_mean_time_diff_plt = plt.barh(x1, i5_6500_mean_time_diff, bar_width, lef
 #arm_cortex_a9_mean_time_user_plt = plt.barh(x0, arm_cortex_a9_mean_time_user, bar_width, left = arm_cortex_a9_mean_time_system, color = mean_user_time_color, edgecolor = 'black')
 #arm_cortex_a9_mean_time_diff_plt = plt.barh(x0, arm_cortex_a9_mean_time_diff, bar_width, left = (arm_cortex_a9_mean_time_system + arm_cortex_a9_mean_time_user), capsize= 3, xerr = arm_cortex_a9_std_time_real, color = mean_diff_time_color, edgecolor = 'black')
 
+
+# Texts and arrows for different processors
 plt.text(7.5, bar_width*6-1, "Intel i7-7700K")
 plt.text(7.5, bar_width*3-1, "AMD Ryzen 7 2700X")
 plt.text(7.5, 0-1, "Intel i5-6500")
 
-#plt.arrow(7.4, bar_width*6+1, -2, -2)
-#plt.arrow(7.4, bar_width*3+1, -2, -2)
-#plt.arrow(7.4, 0+1, -2, -2)
-
 ax.annotate("", xy=(4.8, bar_width*3+1), xytext=(7.4, bar_width*6), arrowprops=dict(arrowstyle="->"))
 ax.annotate("", xy=(4.8, bar_width*2), xytext=(7.4, bar_width*3), arrowprops=dict(arrowstyle="->"))
 ax.annotate("", xy=(4.8, bar_width), xytext=(7.4, 0), arrowprops=dict(arrowstyle="->"))
+
+
+# legend
+#plt.legend(handles = [i7_7700k_std_time_system, i7_7700k_mean_time_user, i7_7700k_mean_time_diff])
+ax.legend(loc = 'upper right', labels = ('system', 'user', 'difference to real'))
 
 ax.set_xlabel('Runtime [s]')
 ax.set_title('MiBench Runtimes')
